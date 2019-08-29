@@ -1,25 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Create new Account</title>
+<title><spring:message code="lbl.title" /></title>
 </head>
 <body>
-	<form name="accountForm" action="saveAccount" method="POST">
+	<h1>
+		<spring:message code="lbl.title" />
+	</h1>
+	<form:form action="saveAccount" modelAttribute="account" method="POST">
 		<table>
 			<tr>
 				<td>Account#:</td>
-				<td><input type="text" name="accountNo" /></td>
+				<td><form:input path="accountNo" size="30" /></td>
 			</tr>
 			<tr>
 				<td>Account Holder Name:</td>
-				<td><input type="text" name="accountHolderName" /></td>
+				<td><form:input path="accountHolderName" size="30" /></td>
 			</tr>
 			<tr>
 				<td>Account Balance:</td>
-				<td><input type="text" name="balance" /></td>
+				<td><form:input path="balance" size="30" /></td>
 			</tr>
 			<tr>
 
@@ -27,7 +33,7 @@
 					name="btnSubmit" /></td>
 			</tr>
 		</table>
-	</form>
+	</form:form>
 
 </body>
 </html>
