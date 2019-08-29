@@ -7,7 +7,7 @@
 <title>Create new Account</title>
 </head>
 <body>
-	<form name="accountForm" action="showAccount">
+	<form name="accountForm" action="saveAccount" method="POST">
 		<table>
 			<tr>
 				<td>Account#:</td>
