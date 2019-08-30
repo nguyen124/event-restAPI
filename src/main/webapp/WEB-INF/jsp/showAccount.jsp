@@ -15,8 +15,17 @@
 	<%-- <p>Account#: ${param.accountNo }</p>
 	<p>Account Holder#: ${param.accountHolderName}</p>
 	<p>Account balance#: ${param.balance }</p> --%>
-	<p>Account#: ${account.accountNo}</p>
-	<p>Account Holder#: ${account.accountHolderName}</p>
-	<p>Account balance#: ${account.balance}</p>
+	<p>
+		<spring:message code="lbl.accountNo" />
+		#: ${account.accountNo}
+	</p>
+	<p>
+		<spring:message code="lbl.accountHolderName" />
+		#: ${account.accountHolderName}
+	</p>
+	<p>
+		<spring:message code="lbl.balance" />
+		#: ${account.balance}
+	</p>
 </body>
 </html>
