@@ -41,6 +41,11 @@
 						path="dob" cssClass="error" /></td>
 			</tr>
 			<tr>
+				<td><spring:message code="lbl.psCode" /></td>
+				<td><form:input path="psCode" size="30" /> <form:errors
+						path="psCode" cssClass="error" /></td>
+			</tr>
+			<tr>
 				<td colspan="2"><input type="submit" value="Create Account"
 					name="btnSubmit" /></td>
 			</tr>
