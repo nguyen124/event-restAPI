@@ -19,6 +19,9 @@
 		base-package="com.afs.controller" />
 	<mvc:annotation-driven />
 
+	<mvc:resources mapping="/static/**"
+		location="/static/" cache-period="31556926" />
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />

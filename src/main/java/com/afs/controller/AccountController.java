@@ -31,7 +31,7 @@ public class AccountController {
 	@RequestMapping("/newAccount")
 	public String newAccount(Model model) {
 		model.addAttribute("account", new Account());
-		return "newAccount";
+		return "newAccount2";
 	}
 
 	@RequestMapping("/showAccount")
