@@ -1,5 +1,7 @@
 package com.afs.dao;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import com.afs.entity.AccountEntity;
 import com.afs.model.Account;
 
 @Repository
+@Transactional
 public class AccountDAOImpl implements AccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
