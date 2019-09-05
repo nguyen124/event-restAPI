@@ -5,10 +5,11 @@
 		var self = this;
 
 		self.user = {
-			id : null,
-			username : '',
-			address : '',
-			email : ''
+			accountNo : null,
+			accountHolderName : '',
+			balance : '',
+			dob : '',
+			psCode : ''
 		};
 		self.users = [];
 		self.submit = submit;
@@ -26,62 +27,63 @@
 			});
 		}
 
-		function createUser(user) {
-			UserService.createUser(user).then(fetchAllUsers,
+		function createUser() {
+			UserService.createUser(self.user).then(fetchAllUsers,
 					function(errResponse) {
 						console.error('Error while creating User');
 					});
 		}
 
-		function updateUser(user, id) {
-			UserService.updateUser(user, id).then(fetchAllUsers,
+		function updateUser(accountNo) {
+			UserService.updateUser(self.user, accountNo).then(fetchAllUsers,
 					function(errResponse) {
 						console.error('Error while updating User');
 					});
 		}
 
-		function deleteUser(id) {
-			UserService.deleteUser(id).then(fetchAllUsers,
+		function deleteUser(accountNo) {
+			UserService.deleteUser(accountNo).then(fetchAllUsers,
 					function(errResponse) {
 						console.error('Error while deleting User');
 					});
 		}
 
 		function submit() {
-			if (self.user.id === null) {
+			if (self.user.accountNo === null) {
 				console.log('Saving new user', self.user);
 				createUser(self.user);
 			} else {
-				updateUser(self.user, self.user.id);
-				console.log('User updated with id', self.user.id);
+				updateUser(self.user, self.user.accountNo);
+				console.log('User updated with accountNo', self.user.accountNo);
 			}
 			reset();
 		}
 
-		function edit(id) {
-			console.log('id to be edited', id);
+		function edit(accountNo) {
+			console.log('accountNo to be edited', accountNo);
 			for (var i = 0; i < self.users.length; i++) {
-				if (users.users[i].id === id) {
+				if (users.users[i].accountNo === accountNo) {
 					self.user = angular.copy(self.users[i]);
 					break;
 				}
 			}
 		}
 
-		function remove(id) {
-			console.log('id to be deleted', id);
-			if (self.user.id === id) {
+		function remove(accountNo) {
+			console.log('accountNo to be deleted', accountNo);
+			if (self.user.accountNo === accountNo) {
 				reset();
 			}
-			deleteUser(id);
+			deleteUser(accountNo);
 		}
 
 		function reset() {
 			self.user = {
-				id : null,
-				username : '',
-				address : '',
-				email : ''
+				accountNo : null,
+				accountHolderName : '',
+				balance : '',
+				dob : '',
+				psCode : ''
 			};
 			$scope.myForm.$setPristine();
 		}

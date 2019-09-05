@@ -24,8 +24,7 @@
 		<table>
 			<tr>
 				<td><spring:message code="lbl.accountNo" /></td>
-				<td><form:input path="accountNo" size="30"
-						disabled="${account.accountNo!=null}" /> <form:errors
+				<td><form:input path="accountNo" size="30" /> <form:errors
 						path="accountNo" cssClass="error" /></td>
 			</tr>
 			<tr>

@@ -24,7 +24,7 @@ import com.afs.services.AccountService;
 public class AccountController {
 
 	@Autowired
-	AccountService accountService;
+	private AccountService accountService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder dataBinder) {
@@ -62,10 +62,6 @@ public class AccountController {
 		}
 	}
 
-	@RequestMapping("/about")
-	public String showAboutPage() {
-		return "about";
-	}
 
 	@GetMapping("/list")
 	public String listAccounts(Model model) {
@@ -74,7 +70,7 @@ public class AccountController {
 		return "listAccounts";
 	}
 
-	@RequestMapping("/showAccount")
+	@GetMapping("/showAccount")
 	public String showAccount() {
 		return "showAccount";
 	}
@@ -86,28 +82,10 @@ public class AccountController {
 		return "newAccount";
 	}
 
-	/*
-	 * @RequestMapping(value = "/saveAccount", method = RequestMethod.POST) public
-	 * String saveAccount(Model model, HttpServletRequest request) { String acNo =
-	 * request.getParameter("accountNo"); String custName =
-	 * request.getParameter("accountHolderName"); String balance =
-	 * request.getParameter("balance");
-	 * 
-	 * Account acc = new Account(Integer.parseInt(acNo), custName,
-	 * Integer.parseInt(balance)); // model.addAttribute("accountNumber", acNo); //
-	 * model.addAttribute("accountHolderNumber", custName); //
-	 * model.addAttribute("balance", balance); model.addAttribute("account", acc);
-	 * return "showAccount"; }
-	 */
+	@GetMapping("/delete")
+	public String deleteAccount(@RequestParam("accountNo") int accountNo, Model model) {
+		accountService.deleteAccount(accountNo);
+		return "redirect:/list";
+	}
 
-	// @RequestMapping(value = "/saveAccount", method = RequestMethod.POST)
-	// public String saveAccount(Model model, @RequestParam("accountNo") String
-	// acNo,
-	// @RequestParam("accountHolderName") String custName, @RequestParam("balance")
-	// String balance) {
-	// Account acc = new Account(Integer.parseInt(acNo), custName,
-	// Integer.parseInt(balance));
-	// model.addAttribute("account", acc);
-	// return "showAccount";
-	// }
 }

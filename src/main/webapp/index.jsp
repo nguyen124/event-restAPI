@@ -12,7 +12,7 @@
 </head>
 
 <body ng-app="myApp" class="ng-cloak">
-	<div class="generic-container" ng-controller="UserController as ctrl">
+	<div class="container" ng-controller="UserController as ctrl">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="lead">User Registration Form</div>
@@ -23,18 +23,20 @@
 					<input type="hidden" ng-model="ctrl.user.id" />
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-table" for="uname">Name</label>
+							<label class="col-md-2 control-label" for="accountNo">Account
+								Number</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.username" id="uname"
-									class="username form-control input-sm"
-									placeholder="Enter your name" required ng-minlength="3" />
+								<input type="text" ng-model="ctrl.user.accountNo" id="accountNo"
+									class="form-control input-sm"
+									placeholder="Enter account number" required />
 
 								<div class="has-error" ng-show="myForm.$dirty">
-									<div ng-show="myForm.uname.$error.required">This is a
+									<div ng-show="myForm.accountNo.$error.required">This is a
 										required field</div>
-									<div ng-show="myForm.uname.$error.minlength">Minimum
+									<div ng-show="myForm.accountNo.$error.minlength">Minimum
 										required is 3</div>
-									<div ng-show="myForm.uname.$invalid">This field is valid</div>
+									<div ng-show="myForm.accountNo.$invalid">This field is
+										valid</div>
 								</div>
 							</div>
 						</div>
@@ -42,25 +44,28 @@
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-label" for="address">Address</label>
+							<label class="col-md-2 control-label" for="accountHolderName">Account
+								Holder Name</label>
 							<div class="col-md-7">
-								<input type="text" ng-model="ctrl.user.address" id="address"
-									class="form-control input-sm" placeholder="Enter your address" />
+								<input type="text" ng-model="ctrl.user.accountHolderName"
+									id="accountHolderName" class="form-control input-sm"
+									placeholder="Enter your account name" />
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="form-group col-md-12">
-							<label class="col-md-2 control-label" for="email">Email</label>
+							<label class="col-md-2 control-label" for="balance">Account
+								Balance</label>
 							<div class="col-md-7">
-								<input type="email" ng-model="ctrl.user.email" id="email"
-									class="email form-control input-sm"
-									placeholder="Enter your email" required />
+								<input type="text" ng-model="ctrl.user.balance" id="balance"
+									class="form-control input-sm" placeholder="Enter your balance"
+									required />
 								<div class="has-error" ng-show="myForm.$dirty">
-									<div ng-show="myForm.email.$error.required">This is
+									<div ng-show="myForm.balance.$error.required">This is
 										required field</div>
-									<div ng-show="myForm.email.$invalid">This is invalid
+									<div ng-show="myForm.balance.$invalid">This is invalid
 										value</div>
 								</div>
 							</div>
@@ -68,8 +73,43 @@
 					</div>
 
 					<div class="row">
-						<div class="form-actions floatRight">
-							<input type="submit" value="{{!ctrl.user.id ? 'Add' : 'Update'}}"
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-label" for="dob">Date of
+								Birth</label>
+							<div class="col-md-7">
+								<input type="text" ng-model="ctrl.user.dob" id="dob"
+									class="form-control input-sm"
+									placeholder="Enter your date of birth" required />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<div ng-show="myForm.dob.$error.required">This is
+										required field</div>
+									<div ng-show="myForm.dob.$invalid">This is invalid value</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-2 control-label" for="psCode">PS
+								Code</label>
+							<div class="col-md-7">
+								<input type="text" ng-model="ctrl.user.psCode" id="psCode"
+									class="form-control input-sm" placeholder="Enter your PS code"
+									required />
+								<div class="has-error" ng-show="myForm.$dirty">
+									<div ng-show="myForm.psCode.$error.required">This is
+										required field</div>
+									<div ng-show="myForm.psCode.$invalid">This is invalid
+										value</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-actions col-md-12">
+							<input type="submit"
+								value="{{!ctrl.user.accountNo ? 'Add' : 'Update'}}"
 								class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid" />
 							<button type="button" ng-click="ctrl.reset()"
 								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset
@@ -80,6 +120,7 @@
 				</form>
 			</div>
 		</div>
+
 		<div class="panel panel-default">
 			<!-- Default panel contents -->
 			<div class="panel-heading">
@@ -89,23 +130,25 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>ID.</th>
-							<th>Name</th>
-							<th>Address</th>
-							<th>Email</th>
-							<th width="20%"></th>
+							<th>AccountNo</th>
+							<th>Account Holder</th>
+							<th>Balance</th>
+							<th>Date of Birth</th>
+							<th>PS Code</th>
+							<th>&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="u in ctrl.users">
-							<td><div ng-bind="u.id"></div></td>
-							<td><div ng-bind="u.username"></div></td>
-							<td><div ng-bind="u.address"></div></td>
-							<td><div ng-bind="u.email"></div></td>
+							<td><div ng-bind="u.accountNo"></div></td>
+							<td><div ng-bind="u.accountHolderName"></div></td>
+							<td><div ng-bind="u.balance"></div></td>
+							<td><div ng-bind="u.dob"></div></td>
+							<td><div ng-bind="u.psCode"></div></td>
 							<td>
-								<button type="button" ng-click="ctrl.edit(u.id)"
+								<button type="button" ng-click="ctrl.edit(u.accountNo)"
 									class="btn btn-success custom-width">Edit</button>
-								<button type="button" ng-click="ctrl.remove(u.id)"
+								<button type="button" ng-click="ctrl.remove(u.accountNo)"
 									class="btn btn-danger custom-width">Remove</button>
 							</td>
 						</tr>

@@ -3,7 +3,6 @@ package com.afs.model;
 import java.util.Date;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -28,24 +27,10 @@ public class Account {
 	@NotNull(message = "dob can't be blank")
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Past(message = "DoB can't be in future")
-
 	private Date dob;
 
 	@PSCode()
 	private String psCode;
-
-	public Account() {
-		accountNo = null;
-		accountHolderName = "";
-		balance = 0;
-	}
-
-	public Account(Integer accountNo, String accountHolderName, Integer balance) {
-		super();
-		this.accountNo = accountNo;
-		this.accountHolderName = accountHolderName;
-		this.balance = balance;
-	}
 
 	public String getAccountHolderName() {
 		return accountHolderName;

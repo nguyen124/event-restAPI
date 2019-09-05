@@ -1,28 +1,33 @@
 package com.afs.model;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("/user")
 public class User {
 
-	private long id;
+	private Long accountNo;
 
-	private String username;
+	private String accountHolderName;
 
-	private String address;
+	private Integer balance;
 
-	private String email;
+	private Date dob;
+
+	private String psCode;
 
 	public User() {
-		id = 0;
+		accountNo = 0L;
 	}
 
-	public User(long id, String username, String address, String email) {
-		this.id = id;
-		this.username = username;
-		this.address = address;
-		this.email = email;
+	public User(Long accountNo, String username, Integer balance, Date dob, String psCode) {
+		this.accountNo = accountNo;
+		this.accountHolderName = username;
+		this.balance = balance;
+		this.dob = dob;
+		this.psCode = psCode;
 	}
 
 	@Override
@@ -37,54 +42,64 @@ public class User {
 			return false;
 		}
 		User other = (User) obj;
-		if (id != other.id) {
+		if (accountNo != other.accountNo) {
 			return false;
 		}
 		return true;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getUsername() {
-		return username;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + (int) (accountNo ^ (accountNo >>> 32));
 		return result;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", address=" + address + ", email=" + email + "]";
+		return "User [AccountNo=" + accountNo + ", username=" + accountHolderName + ", balance=" + balance + ", dob="
+				+ dob + ", psCode=" + psCode + "]";
 	}
+
+	public Long getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(Long accountNo) {
+		this.accountNo = accountNo;
+	}
+
+	public String getAccountHolderName() {
+		return accountHolderName;
+	}
+
+	public void setAccountHolderName(String accountHolderName) {
+		this.accountHolderName = accountHolderName;
+	}
+
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getPsCode() {
+		return psCode;
+	}
+
+	public void setPsCode(String psCode) {
+		this.psCode = psCode;
+	}
+
 }

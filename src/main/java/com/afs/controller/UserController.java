@@ -48,16 +48,16 @@ public class UserController {
 	// Create User
 	@RequestMapping(value = "/user/", method = RequestMethod.POST)
 	public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder ucBuilder) {
-		System.out.println("Creating User: " + user.getUsername());
+		System.out.println("Creating User: " + user.getAccountHolderName());
 
 		if (userService.isUserExist(user)) {
-			System.out.println("A username with name " + user.getUsername() + "already exist");
+			System.out.println("A username with name " + user.getAccountHolderName() + "already exist");
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}
 		userService.saveUser(user);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/user/{id}").buildAndExpand(user.getAccountNo()).toUri());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
@@ -70,9 +70,9 @@ public class UserController {
 			System.out.println("User with id " + id + "not found");
 			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
 		}
-		currentUser.setUsername(user.getUsername());
-		currentUser.setAddress(user.getAddress());
-		currentUser.setEmail(user.getEmail());
+		currentUser.setAccountHolderName(user.getAccountHolderName());
+		currentUser.setBalance(user.getBalance());
+		currentUser.setDob(user.getDob());
 
 		userService.updateUser(currentUser);
 		return new ResponseEntity<User>(currentUser, HttpStatus.OK);

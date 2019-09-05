@@ -32,4 +32,9 @@ public class AccountServiceImpl implements AccountService {
 		return accountDAO.getAccount(accountNo);
 	}
 
+	@Transactional
+	public boolean deleteAccount(int accountNo) {
+		return accountDAO.deleteAccount(accountNo);
+	}
+
 }

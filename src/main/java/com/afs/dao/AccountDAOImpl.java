@@ -78,4 +78,16 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
+	public boolean deleteAccount(int accountNo) {
+		boolean deleteFlag = true;
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			AccountEntity accountEntity = (AccountEntity) session.load(AccountEntity.class, accountNo);
+			session.delete(accountEntity);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return deleteFlag;
+	}
+
 }

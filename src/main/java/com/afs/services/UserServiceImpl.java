@@ -1,6 +1,7 @@
 package com.afs.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -21,15 +22,14 @@ public class UserServiceImpl implements UserService {
 
 	private static List<User> populateDummyUsers() {
 		List<User> users = new ArrayList<User>();
-		users.add(new User(counter.incrementAndGet(), "Sam", "NY", "sam@abc.com"));
-		users.add(new User(counter.incrementAndGet(), "Tomy", "ALBAMA", "tomy@abc.com"));
-		users.add(new User(counter.incrementAndGet(), "Kelly", "NEBRASKA", "kelly@abc.com"));
+		users.add(new User(new Long(counter.incrementAndGet()), "Sam", 123, new Date("01/01/1988"), "PSCode"));
+		users.add(new User(new Long(counter.incrementAndGet()), "Sam", 123, new Date("01/02/1988"), "PSCode"));
 		return users;
 	}
 
 	public User findById(long id) {
 		for (User user : users) {
-			if (user.getId() == id) {
+			if (user.getAccountNo() == id) {
 				return user;
 			}
 		}
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
 
 	public User findByName(String name) {
 		for (User user : users) {
-			if (user.getUsername().equalsIgnoreCase(name)) {
+			if (user.getAccountHolderName().equalsIgnoreCase(name)) {
 				return user;
 			}
 		}
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void saveUser(User user) {
-		user.setId(counter.incrementAndGet());
+		user.setAccountNo(new Long(counter.incrementAndGet()));
 		users.add(user);
 	}
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 	public void deleteUserById(long id) {
 		for (Iterator<User> iterator = users.iterator(); iterator.hasNext();) {
 			User user = iterator.next();
-			if (user.getId() == id) {
+			if (user.getAccountNo() == id) {
 				iterator.remove();
 			}
 		}
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public boolean isUserExist(User user) {
-		return findByName(user.getUsername()) != null;
+		return findByName(user.getAccountHolderName()) != null;
 	}
 
 }
