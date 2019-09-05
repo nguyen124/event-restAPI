@@ -16,15 +16,19 @@
 				<th><spring:message code="lbl.accountNo"></spring:message></th>
 				<th><spring:message code="lbl.accountHolderName"></spring:message></th>
 				<th><spring:message code="lbl.balance"></spring:message></th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach var="account" items="${accounts}">
-
+				<c:url var="updateLink" value="edit">
+					<c:param name="accountNo" value="${account.accountNo}" />
+				</c:url>
 				<tr>
 					<td>${account.accountNo}</td>
 					<td>${account.accountHolderName}</td>
 					<td>${account.balance}</td>
+					<td><a href="${updateLink}">Edit</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

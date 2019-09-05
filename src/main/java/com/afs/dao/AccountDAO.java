@@ -8,4 +8,6 @@ public interface AccountDAO {
 	public boolean saveAccount(Account account);
 
 	public List<Account> getAccounts();
+
+	public Account getAccount(Integer accountNo);
 }

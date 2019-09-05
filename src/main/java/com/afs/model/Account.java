@@ -15,23 +15,27 @@ import com.afs.validations.PSCode;
 
 public class Account {
 
+	private Integer accountNo;
+
 	@Size(min = 2, max = 20, message = "Invalid length for Account Holder Name")
 	@Pattern(regexp = "[A-Za-z(\\s)]+")
 	private String accountHolderName;
 
-	private Integer accountNo;
 	@NotNull(message = "balance is required")
 	@Min(value = 500, message = "Minimum balance is 500")
 	private Integer balance;
+
 	@NotNull(message = "dob can't be blank")
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Past(message = "DoB can't be in future")
+
 	private Date dob;
+
 	@PSCode()
-	String psCode;
+	private String psCode;
 
 	public Account() {
-		accountNo = 0;
+		accountNo = null;
 		accountHolderName = "";
 		balance = 0;
 	}

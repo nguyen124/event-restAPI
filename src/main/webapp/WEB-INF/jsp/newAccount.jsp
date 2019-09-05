@@ -3,6 +3,8 @@
 
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +24,8 @@
 		<table>
 			<tr>
 				<td><spring:message code="lbl.accountNo" /></td>
-				<td><form:input path="accountNo" size="30" /> <form:errors
+				<td><form:input path="accountNo" size="30"
+						disabled="${account.accountNo!=null}" /> <form:errors
 						path="accountNo" cssClass="error" /></td>
 			</tr>
 			<tr>
@@ -46,8 +49,17 @@
 						path="psCode" cssClass="error" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Create Account"
-					name="btnSubmit" /></td>
+				<c:choose>
+					<c:when test="${account.accountNo == null }">
+						<td colspan="2"><input type="submit" value="Create"
+							name="btnSubmit" /></td>
+					</c:when>
+					<c:otherwise>
+						<td colspan="2"><input type="submit" value="Update"
+							name="btnSubmit" /></td>
+					</c:otherwise>
+				</c:choose>
+
 			</tr>
 		</table>
 	</form:form>
