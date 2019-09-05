@@ -70,11 +70,6 @@ public class AccountController {
 		return "listAccounts";
 	}
 
-	@GetMapping("/showAccount")
-	public String showAccount() {
-		return "showAccount";
-	}
-
 	@GetMapping("/edit")
 	public String updateAccount(@RequestParam("accountNo") int accountNo, Model model) {
 		Account account = accountService.getAccount(new Integer(accountNo));

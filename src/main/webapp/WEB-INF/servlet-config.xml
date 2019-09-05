@@ -15,12 +15,11 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	<context:component-scan
-		base-package="com.afs" />
+	<context:component-scan base-package="com.afs" />
 	<mvc:annotation-driven />
 
-	<mvc:resources mapping="/static/**"
-		location="/static/" cache-period="31556926" />
+	<mvc:resources mapping="/static/**" location="/static/"
+		cache-period="31556926" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -33,7 +32,7 @@
 		<property name="basenames">
 			<list>
 				<value>
-					WEB-INF/account
+					static/resources/account
 				</value>
 			</list>
 		</property>
