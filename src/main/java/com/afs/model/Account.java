@@ -72,4 +72,8 @@ public class Account {
 		this.psCode = psCode;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("{accountNo: %d, holder: %s}", this.accountNo, this.accountHolderName);
+	}
 }
