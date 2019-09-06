@@ -11,12 +11,17 @@
 		<intercept-url pattern="/list*"
 			access="hasRole('ROLE_ADMIN')" />
 		<http-basic />
+		<form-login login-page="/user/login"
+			authentication-failure-url="/user/login?error=true"
+			username-parameter="username" password-parameter="password"
+			default-target-url="/list"></form-login>
 	</http>
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="hai" password="pass" authorities="ROLE_ADMIN" />
-				<user name="nam" password="pass" authorities="ROLE_USER" />
+			<user-service
+				properties="/static/resources/user.properties">
+				<!--<user name="hai" password="pass" authorities="ROLE_ADMIN" /> <user 
+					name="nam" password="pass" authorities="ROLE_USER" /> -->
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>

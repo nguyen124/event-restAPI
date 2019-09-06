@@ -8,19 +8,15 @@
 <head>
 <link href="<c:url value='static/css/app.css' />" rel="stylesheet"></link>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<%@ include file="/WEB-INF/jsp/header.jsp"%>
 </head>
 
 <body ng-app="myApp" class="ng-cloak">
-	<%@ include file="WEB-INF/jsp/header.jsp"%>
+
+	<div class="container">
+		<h2 class="text-muted">Glegoo</h2>
+	</div>
+
 	<div class="container" ng-controller="UserController as ctrl">
 		<div class="panel panel-default">
 			<div class="panel-heading">

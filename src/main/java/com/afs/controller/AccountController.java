@@ -62,7 +62,6 @@ public class AccountController {
 		}
 	}
 
-
 	@GetMapping("/list")
 	public String listAccounts(Model model) {
 		List<Account> accounts = accountService.getAccounts();
@@ -83,4 +82,16 @@ public class AccountController {
 		return "redirect:/list";
 	}
 
+	@RequestMapping("/user/login")
+	public String login(@RequestParam(value = "error", required = false) String error,
+			@RequestParam(value = "logout", required = false) String logout, Model model) {
+		if (error != null) {
+			model.addAttribute("error", "Invalid Username or Password");
+		}
+
+		if (logout != null) {
+			model.addAttribute("msg", "You've been logged out successfully");
+		}
+		return "login";
+	}
 }
