@@ -37,7 +37,7 @@
 		<property name="basenames">
 			<list>
 				<value>
-					static/resources/account
+					/static/resources/account
 				</value>
 			</list>
 		</property>
