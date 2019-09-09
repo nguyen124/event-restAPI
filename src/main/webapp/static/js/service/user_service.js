@@ -3,7 +3,7 @@
 (function(module) {
 	var userService = function($http, $q) {
 
-		var REST_SERVICE_URI = 'http://localhost:8080/MyApp/user/';
+		var REST_SERVICE_URI = 'http://localhost:8080/MyApp/account/';
 
 		var factory = {
 			fetchAllUsers : fetchAllUsers,
@@ -19,7 +19,7 @@
 			$http.get(REST_SERVICE_URI).then(function(response) {
 				deferred.resolve(response.data);
 			}, function(err) {
-				console.error('Error while fetching users');
+				console.log('Error while fetching users');
 				deferred.reject(err);
 			});
 			return deferred.promise;
@@ -30,7 +30,7 @@
 			$http.post(REST_SERVICE_URI, user).then(function(response) {
 				deferred.resolve(response.data);
 			}, function(err) {
-				console.error('Error while creating users');
+				console.log('Error while creating users');
 				deferred.reject(err);
 			});
 
@@ -42,7 +42,7 @@
 			$http.put(REST_SERVICE_URI + accountNo, user).then(function(response) {
 				deferred.resolve(response.data);
 			}, function(err) {
-				console.error('Error while updating user');
+				console.log('Error while updating user');
 				deferred.reject(err);
 			});
 			return deferred.promise;
@@ -53,7 +53,7 @@
 			$http.delete(REST_SERVICE_URI+accountNo).then(function(response){
 				deferred.resolve(response.data);
 			}, function(err){
-				console.error('Error while deleting user');
+				console.log('Error while deleting user');
 				deferred.reject(err);
 			});
 			return deferred.promise;

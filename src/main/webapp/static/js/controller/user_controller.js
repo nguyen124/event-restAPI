@@ -49,13 +49,7 @@
 		}
 
 		function submit() {
-			if (self.user.accountNo === null) {
-				console.log('Saving new user', self.user);
-				createUser(self.user);
-			} else {
-				updateUser(self.user, self.user.accountNo);
-				console.log('User updated with accountNo', self.user.accountNo);
-			}
+			createUser(self.user);
 			reset();
 		}
 

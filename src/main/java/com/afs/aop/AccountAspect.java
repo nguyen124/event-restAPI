@@ -19,8 +19,8 @@ public class AccountAspect {
 		Account account = (Account) args[0];
 		AccountDAO accountDAO = (AccountDAO) joinPoint.getTarget();
 		int accountNo = account.getAccountNo();
-		if (accountDAO.getAccount(accountNo) != null) {
-			throw new RuntimeException("Account with account number: " + accountNo + "is already exist");
-		}
+//		if (accountDAO.getAccount(accountNo) != null) {
+//			throw new RuntimeException("Account with account number: " + accountNo + " is already exist");
+//		}
 	}
 }

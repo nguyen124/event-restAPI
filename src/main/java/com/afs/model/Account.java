@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.afs.validations.PSCode;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Account {
 
@@ -27,6 +28,7 @@ public class Account {
 	@NotNull(message = "dob can't be blank")
 	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Past(message = "DoB can't be in future")
+	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date dob;
 
 	@PSCode()
@@ -70,6 +72,34 @@ public class Account {
 
 	public void setPsCode(String psCode) {
 		this.psCode = psCode;
+	}
+
+	@Override
+	public int hashCode() {
+		return this.accountNo;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		// checking if both the object references are
+		// referring to the same object.
+		if (this == obj)
+			return true;
+
+		// it checks if the argument is of the
+		// type Geek by comparing the classes
+		// of the passed argument and this object.
+		// if(!(obj instanceof Geek)) return false; ---> avoid.
+		if (obj == null || obj.getClass() != this.getClass())
+			return false;
+
+		// type casting of the argument.
+		Account account = (Account) obj;
+
+		// comparing the state of argument with
+		// the state of 'this' Object.
+		return (account.accountNo == this.accountNo);
 	}
 
 	@Override

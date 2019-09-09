@@ -15,11 +15,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.afs.model.Account;
 import com.afs.services.AccountService;
@@ -101,13 +99,5 @@ public class AccountController {
 			model.addAttribute("msg", "You've been logged out successfully");
 		}
 		return "login";
-	}
-
-	@ResponseBody
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-	public Account getAccount(@PathVariable("id") Integer accountNo) {
-		System.out.println("Requested Account Number: " + accountNo);
-		Account account = accountService.getAccount(accountNo);
-		return account;
 	}
 }
