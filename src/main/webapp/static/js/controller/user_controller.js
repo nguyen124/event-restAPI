@@ -31,7 +31,7 @@
 		function createUser() {
 			UserService.createUser(self.user).then(fetchAllUsers,
 					function(errResponse) {
-						console.error('Error while creating User');
+						self.error = 'Error while creating User';
 					});
 		}
 

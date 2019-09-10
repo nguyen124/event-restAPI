@@ -22,6 +22,9 @@
 			<div class="panel-heading">
 				<div class="lead">User Registration Form</div>
 			</div>
+			<div class="alert alert-danger" ng-show="ctrl.error">
+				<h3 ng-bind="ctrl.error"></h3>
+			</div>
 			<div class="formcontainer">
 				<form ng-submit="ctrl.submit()" name="myForm"
 					class="form-horizontal">
