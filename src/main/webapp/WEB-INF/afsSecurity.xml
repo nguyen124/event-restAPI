@@ -14,7 +14,8 @@
 		<form-login login-page="/user/login"
 			authentication-failure-url="/user/login?error=true"
 			username-parameter="username" password-parameter="password"
-			default-target-url="/list"></form-login>
+			default-target-url="/list"
+			authentication-success-handler-ref="customSuccessHandler"></form-login>
 		<csrf disabled="true" />
 	</http>
 	<authentication-manager>
@@ -27,4 +28,7 @@
 				authorities-by-username-query="SELECT user.username, role.role as authorities from user, role where user.username= ? and user.id = role.member_id" />
 		</authentication-provider>
 	</authentication-manager>
+
+	<beans:bean id="customSuccessHandler"
+		class="com.afs.authenticate.AuthHandler" />
 </beans:beans>
