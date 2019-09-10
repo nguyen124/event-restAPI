@@ -15,7 +15,6 @@ import com.afs.entity.AccountEntity;
 import com.afs.model.Account;
 
 @Repository
-//@Transactional
 public class AccountDAOImpl implements AccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -63,17 +62,21 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	public Account getAccount(Integer accountNo) {
-		Account account = new Account();
+		Account account = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
 			AccountEntity accountEntity = (AccountEntity) session.load(AccountEntity.class, accountNo);
-			account.setAccountNo(accountEntity.getAccNo());
-			account.setAccountHolderName(accountEntity.getAccHolderName());
-			account.setBalance(accountEntity.getBalance());
-			account.setDob(accountEntity.getDob());
-			account.setPsCode(accountEntity.getPsCode());
+			if (accountEntity != null) {
+				account = new Account();
+				account.setAccountNo(accountEntity.getAccNo());
+				account.setAccountHolderName(accountEntity.getAccHolderName());
+				account.setBalance(accountEntity.getBalance());
+				account.setDob(accountEntity.getDob());
+				account.setPsCode(accountEntity.getPsCode());
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			account = null;
 		}
 		return account;
 	}
