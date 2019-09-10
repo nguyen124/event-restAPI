@@ -75,6 +75,4 @@
 
 	<tx:annotation-driven
 		transaction-manager="myTransactionManager"></tx:annotation-driven>
-
-	<import resource="webflow.xml"></import>
 </beans>

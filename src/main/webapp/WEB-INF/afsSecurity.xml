@@ -14,21 +14,15 @@
 		<form-login login-page="/user/login"
 			authentication-failure-url="/user/login?error=true"
 			username-parameter="username" password-parameter="password"
-			default-target-url="/list"
-			authentication-success-handler-ref="customSuccessHandler"></form-login>
+			default-target-url="/list" />
 		<csrf disabled="true" />
 	</http>
 	<authentication-manager>
 		<authentication-provider>
-			<!--<user-service properties="/static/resources/user.properties"> <user 
-				name="hai" password="pass" authorities="ROLE_ADMIN" /> <user name="nam" password="pass" 
-				authorities="ROLE_USER" /> </user-service> -->
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="SELECT username, password, 'true' as enabled FROM user where username=?"
 				authorities-by-username-query="SELECT user.username, role.role as authorities from user, role where user.username= ? and user.id = role.member_id" />
 		</authentication-provider>
 	</authentication-manager>
 
-	<beans:bean id="customSuccessHandler"
-		class="com.afs.authenticate.AuthHandler" />
 </beans:beans>
