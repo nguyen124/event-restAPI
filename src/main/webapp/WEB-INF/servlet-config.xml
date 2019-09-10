@@ -26,7 +26,8 @@
 
 	<mvc:resources mapping="/static/**" location="/static/"
 		cache-period="31556926" />
-
+	<bean id="accountService" 
+		class="com.afs.services.AccountServiceImpl"></bean>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
@@ -74,4 +75,6 @@
 
 	<tx:annotation-driven
 		transaction-manager="myTransactionManager"></tx:annotation-driven>
+
+	<import resource="webflow.xml"></import>
 </beans>

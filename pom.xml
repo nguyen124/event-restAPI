@@ -14,6 +14,7 @@
 		<hibernate.version>5.4.1.Final</hibernate.version>
 		<security.version>4.2.3.RELEASE</security.version>
 		<jackson.version>2.9.8</jackson.version>
+		<webflow.version>2.4.8.RELEASE</webflow.version>
 	</properties>
 
 	<dependencies>
@@ -151,6 +152,27 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>${jackson.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.webflow/spring-webflow -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${webflow.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.webflow/spring-binding -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-binding</artifactId>
+			<version>${webflow.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.webflow/spring-js -->
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-js</artifactId>
+			<version>${webflow.version}</version>
 		</dependency>
 
 	</dependencies>

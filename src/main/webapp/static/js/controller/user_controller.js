@@ -23,6 +23,7 @@
 		function fetchAllUsers() {
 			UserService.fetchAllUsers().then(function(data) {
 				self.users = data;
+				self.error = '';
 			}, function(err) {
 				console.error(err);
 			});
