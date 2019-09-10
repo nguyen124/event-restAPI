@@ -29,8 +29,8 @@ public class AccountDAOImpl implements AccountDAO {
 		accEnt.setPsCode(account.getPsCode());
 		try {
 			Session currentSession = sessionFactory.getCurrentSession();
-			// currentSession.save(accEnt);
-			currentSession.saveOrUpdate(accEnt);
+			currentSession.save(accEnt);
+			// currentSession.saveOrUpdate(accEnt);
 		} catch (Exception e) {
 			e.printStackTrace();
 			saveFlag = false;
@@ -91,6 +91,27 @@ public class AccountDAOImpl implements AccountDAO {
 			ex.printStackTrace();
 		}
 		return deleteFlag;
+	}
+
+	public Account updateAccount(int id, Account account) {
+		try {
+			if (id == account.getAccountNo()) {
+				Session currentSession = sessionFactory.getCurrentSession();
+				AccountEntity accountEntity = (AccountEntity) currentSession.load(AccountEntity.class, id);
+				if (accountEntity != null) {
+					accountEntity.setAccNo(account.getAccountNo());
+					accountEntity.setAccHolderName(account.getAccountHolderName());
+					accountEntity.setBalance(account.getBalance());
+					accountEntity.setDob(account.getDob());
+					accountEntity.setPsCode(account.getPsCode());
+				}
+				currentSession.update(accountEntity);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return account;
 	}
 
 }

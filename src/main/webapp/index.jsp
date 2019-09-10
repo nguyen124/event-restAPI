@@ -113,8 +113,7 @@
 					</div>
 					<div class="row">
 						<div class="form-actions col-md-12">
-							<input type="submit"
-								value="Add"
+							<input type="submit" ng-model="ctrl.actionValue"
 								class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid" />
 							<button type="button" ng-click="ctrl.reset()"
 								class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset

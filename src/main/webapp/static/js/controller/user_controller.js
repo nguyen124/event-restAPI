@@ -16,6 +16,7 @@
 		self.edit = edit;
 		self.remove = remove;
 		self.reset = reset;
+		self.actionValue = 'Add';
 
 		fetchAllUsers();
 
@@ -35,7 +36,7 @@
 		}
 
 		function updateUser(accountNo) {
-			UserService.updateUser(self.user, accountNo).then(fetchAllUsers,
+			UserService.updateUser(self.user).then(fetchAllUsers,
 					function(errResponse) {
 						console.error('Error while updating User');
 					});
@@ -49,15 +50,21 @@
 		}
 
 		function submit() {
-			createUser(self.user);
+			if (self.actionValue == 'Add') {
+				createUser();
+			} else if (self.actionValue == 'Update') {
+				updateUser();
+			}
 			reset();
 		}
 
 		function edit(accountNo) {
 			console.log('accountNo to be edited', accountNo);
 			for (var i = 0; i < self.users.length; i++) {
-				if (users.users[i].accountNo === accountNo) {
+				if (self.users[i].accountNo === accountNo) {
 					self.user = angular.copy(self.users[i]);
+					self.actionValue = 'Update';
+					console.log("actionValue: " + self.actionValue);
 					break;
 				}
 			}
@@ -79,6 +86,7 @@
 				dob : '',
 				psCode : ''
 			};
+			self.actionValue = 'Add';
 			$scope.myForm.$setPristine();
 		}
 	};

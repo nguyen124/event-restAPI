@@ -37,4 +37,9 @@ public class AccountServiceImpl implements AccountService {
 		return accountDAO.deleteAccount(accountNo);
 	}
 
+	@Transactional
+	public Account updateAccount(int id, Account account) {
+		return accountDAO.updateAccount(id, account);
+	}
+
 }

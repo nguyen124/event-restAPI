@@ -12,4 +12,6 @@ public interface AccountDAO {
 	public Account getAccount(Integer accountNo);
 
 	public boolean deleteAccount(int accountNo);
+
+	public Account updateAccount(int id, Account account);
 }
