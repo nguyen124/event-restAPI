@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.afs.validations.PSCode;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Account {
@@ -31,7 +30,6 @@ public class Account {
 	@JsonFormat(pattern = "MM/dd/yyyy")
 	private Date dob;
 
-	@PSCode()
 	private String psCode;
 
 	public String getAccountHolderName() {
