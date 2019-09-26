@@ -1,6 +1,8 @@
 package com.afs.model;
 
 import java.util.Date;
+import java.util.List;
+import com.afs.model.EventSession;
 
 public class Event {
 
@@ -12,7 +14,8 @@ public class Event {
 	private String imageUrl;
 	private String onlineUrl;
 	private Location location;
-	
+	private List<EventSession> eventSessions;
+
 	public Long getId() {
 		return id;
 	}
@@ -77,5 +80,12 @@ public class Event {
 		this.location = location;
 	}
 
-	
+	public List<EventSession> getEventSessions() {
+		return eventSessions;
+	}
+
+	public void setEventSessions(List<EventSession> sessions) {
+		this.eventSessions = sessions;
+	}
+
 }

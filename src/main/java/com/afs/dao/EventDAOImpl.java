@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.afs.entity.EventEntity;
+import com.afs.entity.EventSessionEntity;
 import com.afs.entity.LocationEntity;
 import com.afs.model.Event;
+import com.afs.model.EventSession;
 import com.afs.model.Location;
 
 @Repository
@@ -54,22 +56,38 @@ public class EventDAOImpl implements EventDAO {
 			Query<EventEntity> query = session.createQuery("From EventEntity", EventEntity.class);
 			List<EventEntity> events = query.getResultList();
 
-			for (EventEntity event : events) {
+			for (EventEntity eventEnt : events) {
 				Event ev = new Event();
-				ev.setName(event.getName());
-				ev.setDate(event.getDate());
-				ev.setPrice(event.getPrice());
-				ev.setTime(event.getTime());
-				ev.setImageUrl(event.getImageUrl());
-				ev.setOnlineUrl(event.getOnlineUrl());
-				
+				ev.setName(eventEnt.getName());
+				ev.setDate(eventEnt.getDate());
+				ev.setPrice(eventEnt.getPrice());
+				ev.setTime(eventEnt.getTime());
+				ev.setImageUrl(eventEnt.getImageUrl());
+				ev.setOnlineUrl(eventEnt.getOnlineUrl());
+
 				Location location = new Location();
-				location.setId(event.getLocation().getId());
-				location.setAddress(event.getLocation().getAddress());
-				location.setCountry(event.getLocation().getCountry());
-				location.setCity(event.getLocation().getCity());
+				location.setId(eventEnt.getLocation().getId());
+				location.setAddress(eventEnt.getLocation().getAddress());
+				location.setCountry(eventEnt.getLocation().getCountry());
+				location.setCity(eventEnt.getLocation().getCity());
 				ev.setLocation(location);
+
+				Query<EventSessionEntity> sessionQuery = session.createQuery("From EventSessionEntity ES where ES.event.id = " + eventEnt.getId(), EventSessionEntity.class);
+				List<EventSessionEntity> eventSessionEntities = sessionQuery.getResultList();
 				
+				List<EventSession> eventSessions = new ArrayList<EventSession>();
+				for(EventSessionEntity sessionEnt : eventSessionEntities) {
+					EventSession eventSession = new EventSession();
+					eventSession.setId(sessionEnt.getId());
+					eventSession.setName(sessionEnt.getName());
+					eventSession.setPresenter(sessionEnt.getPresenter());
+					eventSession.setLevel(sessionEnt.getLevel());
+					eventSession.setDuration(sessionEnt.getDuration());
+					eventSession.setAbstraction(sessionEnt.getAbstraction());
+					eventSessions.add(eventSession);
+				};
+				ev.setEventSessions(eventSessions);
+
 				list.add(ev);
 			}
 		} catch (Exception e) {

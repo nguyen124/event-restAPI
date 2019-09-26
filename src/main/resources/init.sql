@@ -1,30 +1,7 @@
 
-INSERT INTO `psbankdb`.`event`
-(`id`,
-`name`,
-`date`,
-`time`,
-`price`,
-`imageUrl`,
-`onlineUrl`)
+INSERT INTO psbankdb.event
+(id, name, `date`, `time`, price, imageUrl, onlineUrl, locationId)
 VALUES
-(0,
-'event1',
-STR_TO_DATE('1-01-2012', '%d-%m-%Y'),
-'10 am',
-'99',
-'google.com/image.jpg',
-'google.com');
+(1, 'Angular Connect', STR_TO_DATE('09/26/2020', '%m-%d-%Y'), '10:00 am', 99, '/assets/images/angularconnect-shield.png', 'google.com', 0),
+(2, 'Angular Connect', STR_TO_DATE('09/26/2020', '%m-%d-%Y'), '10:00 am', 99, '/assets/images/angularconnect-shield.png', 'google.com', 0);
 
-INSERT INTO `psbankdb`.`location`
-(`id`,
-`street`,
-`city`,
-`country`,
-`eventId`)
-VALUES
-(0,
-'9 grandview',
-'jackson',
-'usa',
-0);
