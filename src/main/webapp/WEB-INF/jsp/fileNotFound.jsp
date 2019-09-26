@@ -1,1 +1,0 @@
-<h1>Requested resource has been moved</h1>
