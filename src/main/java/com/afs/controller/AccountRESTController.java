@@ -33,7 +33,7 @@ public class AccountRESTController {
 		accountService.saveAccount(account);
 		if (result.hasErrors()) {
 			System.out.println("Has error return newAccount");
-			return new ResponseEntity<Boolean>(false, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
 			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 		}

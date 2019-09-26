@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class AccountEntity {
 	@Id
 	@Column(name = "accountNo")
-	private int accNo;
+	private int accNo; // change to Long wrapper class.
 	@Column(name = "accountHolderName")
 	private String accHolderName;
 	@Column(name = "balance")
@@ -21,10 +21,6 @@ public class AccountEntity {
 	private Date dob;
 	@Column(name = "psCode")
 	private String psCode;
-
-	public AccountEntity() {
-
-	}
 
 	public int getAccNo() {
 		return accNo;
