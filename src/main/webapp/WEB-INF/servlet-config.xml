@@ -24,11 +24,6 @@
 	
 	<bean id="accountService" 
 		class="com.afs.services.AccountServiceImpl"></bean>
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
 
 
 	<bean id="dataSource"
