@@ -41,7 +41,7 @@ public class AccountRESTController {
 
 	@RequestMapping(value = "/accounts/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Boolean> updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
-		account.setAccountNo(id);
+		account.setId(id);
 		Boolean acc = accountService.saveOrUpdateAccount(account);
 		return new ResponseEntity<Boolean>(acc, HttpStatus.OK);
 	}

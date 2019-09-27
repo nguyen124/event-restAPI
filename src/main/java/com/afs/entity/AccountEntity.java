@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,8 +13,8 @@ import javax.persistence.Table;
 @Table(name = "account")
 public class AccountEntity {
 	@Id
-	@Column(name = "accountNo")
-	private Long accNo; // change to Long wrapper class.
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Column(name = "accountHolderName")
 	private String accHolderName;
 	@Column(name = "balance")
@@ -22,12 +24,12 @@ public class AccountEntity {
 	@Column(name = "psCode")
 	private String psCode;
 
-	public Long getAccNo() {
-		return accNo;
+	public Long getId() {
+		return id;
 	}
 
-	public void setAccNo(Long accNo) {
-		this.accNo = accNo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getAccHolderName() {

@@ -26,9 +26,11 @@ public class EventDAOImpl implements EventDAO {
 		if (event != null) {
 			EventEntity eventEnt = new EventEntity();
 			setEventEntityBasicInfo(eventEnt, event);
-			setEventEntityLocation(eventEnt, event);
+			LocationEntity locationEnt = new LocationEntity();
+			setEventEntityLocation(eventEnt, locationEnt, event);
 			try {
 				Session currentSession = sessionFactory.getCurrentSession();
+				currentSession.saveOrUpdate(locationEnt);
 				currentSession.saveOrUpdate(eventEnt);
 				saveFlag = true;
 			} catch (Exception e) {
@@ -48,15 +50,14 @@ public class EventDAOImpl implements EventDAO {
 		eventEnt.setOnlineUrl(event.getOnlineUrl());
 	}
 
-	private void setEventEntityLocation(EventEntity eventEnt, Event event) {
-		LocationEntity locationEnt = new LocationEntity();
+	private void setEventEntityLocation(EventEntity eventEnt, LocationEntity locationEnt, Event event) {
 		if (event.getLocation() != null) {
 			locationEnt.setId(event.getLocation().getId());
 			locationEnt.setAddress(event.getLocation().getAddress());
 			locationEnt.setCountry(event.getLocation().getCountry());
 			locationEnt.setCity(event.getLocation().getCity());
-			eventEnt.setLocation(locationEnt);
 		}
+		eventEnt.setLocation(locationEnt);
 	}
 
 	public List<Event> getEvents() {
@@ -120,7 +121,7 @@ public class EventDAOImpl implements EventDAO {
 			eventSession.setAbstraction(sessionEnt.getAbstraction());
 			eventSessions.add(eventSession);
 		}
-		;
+
 		ev.setEventSessions(eventSessions);
 	}
 

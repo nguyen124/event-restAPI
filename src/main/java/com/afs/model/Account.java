@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Account {
 
-	private Long accountNo;
+	private Long id;
 
 	@Size(min = 2, max = 20, message = "Invalid length for Account Holder Name")
 	@Pattern(regexp = "[A-Za-z(\\s)]+")
@@ -36,8 +36,8 @@ public class Account {
 		return accountHolderName;
 	}
 
-	public Long getAccountNo() {
-		return accountNo;
+	public Long getId() {
+		return id;
 	}
 
 	public Integer getBalance() {
@@ -56,8 +56,8 @@ public class Account {
 		this.accountHolderName = accountHolderName;
 	}
 
-	public void setAccountNo(Long accountNo) {
-		this.accountNo = accountNo;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void setBalance(Integer balance) {
@@ -74,6 +74,6 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return String.format("{accountNo: %d, holder: %s}", this.accountNo, this.accountHolderName);
+		return String.format("{accountNo: %d, holder: %s}", this.id, this.accountHolderName);
 	}
 }

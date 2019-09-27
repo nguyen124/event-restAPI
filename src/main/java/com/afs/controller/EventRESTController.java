@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,16 +38,9 @@ public class EventRESTController {
 		}
 	}
 
-//	@RequestMapping(value = "/events/{id}", method = RequestMethod.PUT)
-//	public ResponseEntity<Event> updateEvent(@PathVariable("id") Integer id, @RequestBody Event event) {
-//		Event acc = eventService.updateEvent(id, event);
-//		return new ResponseEntity<Event>(acc, HttpStatus.OK);
-//	}
-//
-//	@RequestMapping(value = "/event/{id}", method = RequestMethod.DELETE)
-//	public ResponseEntity<Boolean> deleteEvent(@PathVariable("id") Integer id) {
-//		Boolean result = eventService.deleteEvent(id);
-//		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
-//	}
-
+	@RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> deleteEvent(@PathVariable("id") Long id) {
+		Boolean result = eventService.deleteEvent(id);
+		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+	}
 }

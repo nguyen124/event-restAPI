@@ -20,7 +20,7 @@ public class AccountDAOImpl implements AccountDAO {
 	public boolean saveOrUpdateAccount(Account account) {
 		boolean saveFlag = true;
 		AccountEntity accEnt = new AccountEntity();
-		accEnt.setAccNo(account.getAccountNo());
+		accEnt.setId(account.getId());
 		accEnt.setAccHolderName(account.getAccountHolderName());
 		accEnt.setBalance(account.getBalance());
 		accEnt.setDob(account.getDob());
@@ -45,7 +45,7 @@ public class AccountDAOImpl implements AccountDAO {
 
 			for (AccountEntity accountEntity : accounts) {
 				Account acc = new Account();
-				acc.setAccountNo(accountEntity.getAccNo());
+				acc.setId(accountEntity.getId());
 				acc.setAccountHolderName(accountEntity.getAccHolderName());
 				acc.setBalance(accountEntity.getBalance());
 				acc.setDob(accountEntity.getDob());
@@ -66,7 +66,7 @@ public class AccountDAOImpl implements AccountDAO {
 			AccountEntity accountEntity = (AccountEntity) session.load(AccountEntity.class, accountNo);
 			if (accountEntity != null) {
 				account = new Account();
-				account.setAccountNo(accountEntity.getAccNo());
+				account.setId(accountEntity.getId());
 				account.setAccountHolderName(accountEntity.getAccHolderName());
 				account.setBalance(accountEntity.getBalance());
 				account.setDob(accountEntity.getDob());
@@ -93,11 +93,11 @@ public class AccountDAOImpl implements AccountDAO {
 
 	public Account updateAccount(Long id, Account account) {
 		try {
-			if (id == account.getAccountNo()) {
+			if (id == account.getId()) {
 				Session currentSession = sessionFactory.getCurrentSession();
 				AccountEntity accountEntity = (AccountEntity) currentSession.load(AccountEntity.class, id);
 				if (accountEntity != null) {
-					accountEntity.setAccNo(account.getAccountNo());
+					accountEntity.setId(account.getId());
 					accountEntity.setAccHolderName(account.getAccountHolderName());
 					accountEntity.setBalance(account.getBalance());
 					accountEntity.setDob(account.getDob());
