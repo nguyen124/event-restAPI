@@ -28,12 +28,13 @@ public class EventDAOImpl implements EventDAO {
 			setEventEntityBasicInfo(eventEnt, event);
 			LocationEntity locationEnt = new LocationEntity();
 			setEventEntityLocation(eventEnt, locationEnt, event);
+			Session currentSession = sessionFactory.getCurrentSession();
 			try {
-				Session currentSession = sessionFactory.getCurrentSession();
 				currentSession.saveOrUpdate(locationEnt);
 				currentSession.saveOrUpdate(eventEnt);
 				saveFlag = true;
 			} catch (Exception e) {
+				currentSession.clear();
 				e.printStackTrace();
 			}
 		}
