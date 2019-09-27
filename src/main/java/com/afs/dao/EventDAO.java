@@ -5,13 +5,12 @@ import java.util.List;
 import com.afs.model.Event;
 
 public interface EventDAO {
-	public boolean saveEvent(Event Event);
+	public boolean saveOrUpdateEvent(Event Event);
 
 	public List<Event> getEvents();
 
-	public Event getEvent(Integer EventNo);
+	public Event getEvent(Long EventNo);
 
-	public boolean deleteEvent(int EventNo);
+	public boolean deleteEvent(Long EventNo);
 
-	public Event updateEvent(int id, Event Event);
 }

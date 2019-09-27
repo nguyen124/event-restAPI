@@ -28,7 +28,7 @@ public class EventRESTController {
 
 	@RequestMapping(value = "/events", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> saveEvent(@RequestBody Event event, BindingResult result) {
-		eventService.saveEvent(event);
+		eventService.saveOrUpdateEvent(event);
 		if (result.hasErrors()) {
 			System.out.println("Has error return newEvent");
 			return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);

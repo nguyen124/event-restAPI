@@ -21,10 +21,24 @@ public class EventDAOImpl implements EventDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public boolean saveEvent(Event event) {
-		boolean saveFlag = true;
+	public boolean saveOrUpdateEvent(Event event) {
+		boolean saveFlag = false;
+		if (event != null) {
+			EventEntity eventEnt = new EventEntity();
+			setEventEntityBasicInfo(eventEnt, event);
+			setEventEntityLocation(eventEnt, event);
+			try {
+				Session currentSession = sessionFactory.getCurrentSession();
+				currentSession.saveOrUpdate(eventEnt);
+				saveFlag = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return saveFlag;
+	}
 
-		EventEntity eventEnt = new EventEntity();
+	private void setEventEntityBasicInfo(EventEntity eventEnt, Event event) {
 		eventEnt.setId(event.getId());
 		eventEnt.setName(event.getName());
 		eventEnt.setDate(event.getDate());
@@ -32,21 +46,17 @@ public class EventDAOImpl implements EventDAO {
 		eventEnt.setTime(event.getTime());
 		eventEnt.setImageUrl(event.getImageUrl());
 		eventEnt.setOnlineUrl(event.getOnlineUrl());
+	}
 
+	private void setEventEntityLocation(EventEntity eventEnt, Event event) {
 		LocationEntity locationEnt = new LocationEntity();
-		locationEnt.setId(event.getLocation().getId());
-		locationEnt.setAddress(event.getLocation().getAddress());
-		locationEnt.setCountry(event.getLocation().getCountry());
-		locationEnt.setCity(event.getLocation().getCity());
-		eventEnt.setLocation(locationEnt);
-		try {
-			Session currentSession = sessionFactory.getCurrentSession();
-			currentSession.save(eventEnt);
-		} catch (Exception e) {
-			e.printStackTrace();
-			saveFlag = false;
+		if (event.getLocation() != null) {
+			locationEnt.setId(event.getLocation().getId());
+			locationEnt.setAddress(event.getLocation().getAddress());
+			locationEnt.setCountry(event.getLocation().getCountry());
+			locationEnt.setCity(event.getLocation().getCity());
+			eventEnt.setLocation(locationEnt);
 		}
-		return saveFlag;
 	}
 
 	public List<Event> getEvents() {
@@ -58,36 +68,7 @@ public class EventDAOImpl implements EventDAO {
 
 			for (EventEntity eventEnt : events) {
 				Event ev = new Event();
-				ev.setName(eventEnt.getName());
-				ev.setDate(eventEnt.getDate());
-				ev.setPrice(eventEnt.getPrice());
-				ev.setTime(eventEnt.getTime());
-				ev.setImageUrl(eventEnt.getImageUrl());
-				ev.setOnlineUrl(eventEnt.getOnlineUrl());
-
-				Location location = new Location();
-				location.setId(eventEnt.getLocation().getId());
-				location.setAddress(eventEnt.getLocation().getAddress());
-				location.setCountry(eventEnt.getLocation().getCountry());
-				location.setCity(eventEnt.getLocation().getCity());
-				ev.setLocation(location);
-
-				Query<EventSessionEntity> sessionQuery = session.createQuery("From EventSessionEntity ES where ES.event.id = " + eventEnt.getId(), EventSessionEntity.class);
-				List<EventSessionEntity> eventSessionEntities = sessionQuery.getResultList();
-				
-				List<EventSession> eventSessions = new ArrayList<EventSession>();
-				for(EventSessionEntity sessionEnt : eventSessionEntities) {
-					EventSession eventSession = new EventSession();
-					eventSession.setId(sessionEnt.getId());
-					eventSession.setName(sessionEnt.getName());
-					eventSession.setPresenter(sessionEnt.getPresenter());
-					eventSession.setLevel(sessionEnt.getLevel());
-					eventSession.setDuration(sessionEnt.getDuration());
-					eventSession.setAbstraction(sessionEnt.getAbstraction());
-					eventSessions.add(eventSession);
-				};
-				ev.setEventSessions(eventSessions);
-
+				loadEvenInfo(ev, eventEnt, session);
 				list.add(ev);
 			}
 		} catch (Exception e) {
@@ -96,19 +77,61 @@ public class EventDAOImpl implements EventDAO {
 		return list;
 	}
 
-	public Event getEvent(Integer EventNo) {
+	private void loadEvenInfo(Event ev, EventEntity eventEnt, Session session) {
+		loadEventBasicInfo(ev, eventEnt);
+		loadEventLocation(ev, eventEnt);
+		loadEventSessions(ev, eventEnt, session);
+	}
+
+	private void loadEventBasicInfo(Event ev, EventEntity eventEnt) {
+		ev.setId(eventEnt.getId());
+		ev.setName(eventEnt.getName());
+		ev.setDate(eventEnt.getDate());
+		ev.setPrice(eventEnt.getPrice());
+		ev.setTime(eventEnt.getTime());
+		ev.setImageUrl(eventEnt.getImageUrl());
+		ev.setOnlineUrl(eventEnt.getOnlineUrl());
+	}
+
+	private void loadEventLocation(Event ev, EventEntity eventEnt) {
+		Location location = new Location();
+		if (eventEnt.getLocation() != null) {
+			location.setId(eventEnt.getLocation().getId());
+			location.setAddress(eventEnt.getLocation().getAddress());
+			location.setCountry(eventEnt.getLocation().getCountry());
+			location.setCity(eventEnt.getLocation().getCity());
+			ev.setLocation(location);
+		}
+	}
+
+	private void loadEventSessions(Event ev, EventEntity eventEnt, Session session) {
+		Query<EventSessionEntity> sessionQuery = session.createQuery(
+				"From EventSessionEntity ES where ES.event.id = " + eventEnt.getId(), EventSessionEntity.class);
+		List<EventSessionEntity> eventSessionEntities = sessionQuery.getResultList();
+
+		List<EventSession> eventSessions = new ArrayList<EventSession>();
+		for (EventSessionEntity sessionEnt : eventSessionEntities) {
+			EventSession eventSession = new EventSession();
+			eventSession.setId(sessionEnt.getId());
+			eventSession.setName(sessionEnt.getName());
+			eventSession.setPresenter(sessionEnt.getPresenter());
+			eventSession.setLevel(sessionEnt.getLevel());
+			eventSession.setDuration(sessionEnt.getDuration());
+			eventSession.setAbstraction(sessionEnt.getAbstraction());
+			eventSessions.add(eventSession);
+		}
+		;
+		ev.setEventSessions(eventSessions);
+	}
+
+	public Event getEvent(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public boolean deleteEvent(int EventNo) {
+	public boolean deleteEvent(Long id) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	public Event updateEvent(int id, Event Event) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

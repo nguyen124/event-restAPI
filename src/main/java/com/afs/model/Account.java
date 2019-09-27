@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Account {
 
-	private Integer accountNo;
+	private Long accountNo;
 
 	@Size(min = 2, max = 20, message = "Invalid length for Account Holder Name")
 	@Pattern(regexp = "[A-Za-z(\\s)]+")
@@ -36,7 +36,7 @@ public class Account {
 		return accountHolderName;
 	}
 
-	public Integer getAccountNo() {
+	public Long getAccountNo() {
 		return accountNo;
 	}
 
@@ -56,7 +56,7 @@ public class Account {
 		this.accountHolderName = accountHolderName;
 	}
 
-	public void setAccountNo(Integer accountNo) {
+	public void setAccountNo(Long accountNo) {
 		this.accountNo = accountNo;
 	}
 
@@ -70,29 +70,6 @@ public class Account {
 
 	public void setPsCode(String psCode) {
 		this.psCode = psCode;
-	}
-
-	@Override
-	public int hashCode() {
-		return this.accountNo;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-
-		// checking if referring to the same object.
-		if (this == obj)
-			return true;
-
-		// it checks if same class
-		if (obj == null || obj.getClass() != this.getClass())
-			return false;
-
-		// type casting of the argument.
-		Account account = (Account) obj;
-
-		// comparing object id
-		return (account.accountNo == this.accountNo);
 	}
 
 	@Override

@@ -21,16 +21,16 @@ public class AccountRESTController {
 	@Autowired
 	private AccountService accountService;
 
-	@RequestMapping(value = "/account", method = RequestMethod.GET)
+	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
 	public ResponseEntity<List<Account>> getAll() {
 		List<Account> accounts = accountService.getAccounts();
 		return new ResponseEntity<List<Account>>(accounts, HttpStatus.OK);
 
 	}
 
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
+	@RequestMapping(value = "/accounts", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> saveAccount(@RequestBody Account account, BindingResult result) {
-		accountService.saveAccount(account);
+		accountService.saveOrUpdateAccount(account);
 		if (result.hasErrors()) {
 			System.out.println("Has error return newAccount");
 			return new ResponseEntity<Boolean>(false, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,14 +39,15 @@ public class AccountRESTController {
 		}
 	}
 
-	@RequestMapping(value = "/account/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Account> updateAccount(@PathVariable("id") Integer id, @RequestBody Account account) {
-		Account acc = accountService.updateAccount(id, account);
-		return new ResponseEntity<Account>(acc, HttpStatus.OK);
+	@RequestMapping(value = "/accounts/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Boolean> updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
+		account.setAccountNo(id);
+		Boolean acc = accountService.saveOrUpdateAccount(account);
+		return new ResponseEntity<Boolean>(acc, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/account/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Boolean> deleteAccount(@PathVariable("id") Integer id) {
+	@RequestMapping(value = "/accounts/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Boolean> deleteAccount(@PathVariable("id") Long id) {
 		Boolean result = accountService.deleteAccount(id);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}

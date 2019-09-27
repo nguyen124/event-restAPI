@@ -17,8 +17,8 @@ public class AccountServiceImpl implements AccountService {
 	AccountDAO accountDAO;
 
 	@Transactional
-	public boolean saveAccount(Account account) {
-		accountDAO.saveAccount(account);
+	public boolean saveOrUpdateAccount(Account account) {
+		accountDAO.saveOrUpdateAccount(account);
 		return false;
 	}
 
@@ -28,18 +28,13 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Transactional
-	public Account getAccount(Integer accountNo) {
+	public Account getAccount(Long accountNo) {
 		return accountDAO.getAccount(accountNo);
 	}
 
 	@Transactional
-	public boolean deleteAccount(int accountNo) {
+	public boolean deleteAccount(Long accountNo) {
 		return accountDAO.deleteAccount(accountNo);
-	}
-
-	@Transactional
-	public Account updateAccount(int id, Account account) {
-		return accountDAO.updateAccount(id, account);
 	}
 
 }

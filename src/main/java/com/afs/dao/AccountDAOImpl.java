@@ -17,7 +17,7 @@ public class AccountDAOImpl implements AccountDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public boolean saveAccount(Account account) {
+	public boolean saveOrUpdateAccount(Account account) {
 		boolean saveFlag = true;
 		AccountEntity accEnt = new AccountEntity();
 		accEnt.setAccNo(account.getAccountNo());
@@ -59,7 +59,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return list;
 	}
 
-	public Account getAccount(Integer accountNo) {
+	public Account getAccount(Long accountNo) {
 		Account account = null;
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -79,7 +79,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
-	public boolean deleteAccount(int accountNo) {
+	public boolean deleteAccount(Long accountNo) {
 		boolean deleteFlag = true;
 		try {
 			Session session = sessionFactory.getCurrentSession();
@@ -91,7 +91,7 @@ public class AccountDAOImpl implements AccountDAO {
 		return deleteFlag;
 	}
 
-	public Account updateAccount(int id, Account account) {
+	public Account updateAccount(Long id, Account account) {
 		try {
 			if (id == account.getAccountNo()) {
 				Session currentSession = sessionFactory.getCurrentSession();

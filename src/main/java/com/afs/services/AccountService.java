@@ -5,13 +5,12 @@ import java.util.List;
 import com.afs.model.Account;
 
 public interface AccountService {
-	public boolean saveAccount(Account account);
+	public boolean saveOrUpdateAccount(Account account);
 
 	public List<Account> getAccounts();
 
-	public Account getAccount(Integer accountNo);
+	public Account getAccount(Long accountNo);
 
-	public boolean deleteAccount(int accountNo);
+	public boolean deleteAccount(Long accountNo);
 	
-	public Account updateAccount(int id, Account account);
 }

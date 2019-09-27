@@ -17,8 +17,8 @@ public class EventServiceImpl implements EventService {
 	EventDAO eventDAO;
 
 	@Transactional
-	public boolean saveEvent(Event event) {
-		eventDAO.saveEvent(event);
+	public boolean saveOrUpdateEvent(Event event) {
+		eventDAO.saveOrUpdateEvent(event);
 		return false;
 	}
 
@@ -28,18 +28,13 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Transactional
-	public Event getEvent(Integer eventNo) {
+	public Event getEvent(Long eventNo) {
 		return eventDAO.getEvent(eventNo);
 	}
 
 	@Transactional
-	public boolean deleteEvent(int eventNo) {
+	public boolean deleteEvent(Long eventNo) {
 		return eventDAO.deleteEvent(eventNo);
-	}
-
-	@Transactional
-	public Event updateEvent(int id, Event event) {
-		return eventDAO.updateEvent(id, event);
 	}
 
 }
