@@ -2,15 +2,16 @@ package com.afs.dao;
 
 import java.util.List;
 
-import com.afs.model.Event;
 import com.afs.model.EventSession;
 
 public interface SessionDAO {
-	public boolean saveOrUpdateSession(EventSession Session, Long eventId);
+	public boolean saveOrUpdateSessionInAnEvent(EventSession eventSession, Long eventId);
 
-	public List<EventSession> getSessions(Long eventId);
+	public List<EventSession> getAllSessionsInAnEvent(Long eventId);
 
-	public EventSession getSession(Long sessionId);
+	public Integer deleteEventSessionById(Long eventSessionId);
 
-	public boolean deleteSession(Long sessionId);
+	public EventSession getEventSessionById(Long eventSessionId);
+
+	public List<EventSession> searchEventSessionByTerm(String term);
 }

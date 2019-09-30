@@ -137,12 +137,11 @@ public class EventDAOImpl implements EventDAO {
 		return result;
 	}
 
-	public Long deleteEvent(Long id) {
+	public int deleteEvent(Long id) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query deleteOneEventQuery = currentSession.createQuery("Delete from EventEntity EE where EE.id = :id");
 		deleteOneEventQuery.setParameter("id", id);
-		long noOfRows = deleteOneEventQuery.executeUpdate();
-		return noOfRows;
+		return deleteOneEventQuery.executeUpdate();
 	}
 
 }

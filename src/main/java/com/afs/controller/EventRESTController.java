@@ -45,8 +45,8 @@ public class EventRESTController {
 	}
 	
 	@RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Long> deleteEvent(@PathVariable("id") Long id) {
-		Long result = eventService.deleteEvent(id);
-		return new ResponseEntity<Long>(result, HttpStatus.OK);
+	public ResponseEntity<Integer> deleteEvent(@PathVariable("id") Long id) {
+		int result = eventService.deleteEvent(id);
+		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	}
 }

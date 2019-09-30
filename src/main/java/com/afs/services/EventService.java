@@ -11,5 +11,5 @@ public interface EventService {
 
 	public Event getEvent(Long eventNo);
 
-	public Long deleteEvent(Long eventNo);
+	public int deleteEvent(Long eventNo);
 }

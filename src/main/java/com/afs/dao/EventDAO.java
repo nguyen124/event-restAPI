@@ -11,6 +11,6 @@ public interface EventDAO {
 
 	public Event getEvent(Long EventNo);
 
-	public Long deleteEvent(Long EventNo);
+	public int deleteEvent(Long EventNo);
 
 }

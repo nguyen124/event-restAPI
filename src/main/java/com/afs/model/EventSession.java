@@ -8,7 +8,7 @@ public class EventSession {
 	private Integer duration;
 	private String level;
 	private String abstraction;
-	private Event event;
+	private Long eventId;
 
 	public Long getId() {
 		return id;
@@ -58,12 +58,12 @@ public class EventSession {
 		this.abstraction = abstraction;
 	}
 
-	public Event getEvent() {
-		return event;
+	public Long getEventId() {
+		return eventId;
 	}
 
-	public void setEvent(Event event) {
-		this.event = event;
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
 	}
 
 }

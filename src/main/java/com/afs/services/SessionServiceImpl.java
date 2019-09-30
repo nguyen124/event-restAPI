@@ -16,21 +16,24 @@ public class SessionServiceImpl implements SessionService {
 	@Autowired
 	SessionDAO eventSessionDAO;
 
-	public boolean saveOrUpdateSession(EventSession session, Long eventId) {
-
-		return eventSessionDAO.saveOrUpdateSession(session, eventId);
+	public boolean saveOrUpdateSessionInAnEvent(EventSession eventSession, Long eventId) {
+		return eventSessionDAO.saveOrUpdateSessionInAnEvent(eventSession, eventId);
 	}
 
-	public List<EventSession> getSessions(Long eventId) {
-		return eventSessionDAO.getSessions(eventId);
+	public List<EventSession> getAllSessionsInAnEvent(Long eventId) {
+		return eventSessionDAO.getAllSessionsInAnEvent(eventId);
 	}
 
-	public EventSession getSession(Long SessionNo) {
-		return null;
+	public EventSession getEventSessionById(Long eventSessionId) {
+		return eventSessionDAO.getEventSessionById(eventSessionId);
 	}
 
-	public boolean deleteSession(Long SessionNo) {
-		return false;
+	public int deleteEventSessionById(Long eventSessionId) {
+		return eventSessionDAO.deleteEventSessionById(eventSessionId);
+	}
+
+	public List<EventSession> searchEventSessionByTerm(String term) {
+		return eventSessionDAO.searchEventSessionByTerm(term);
 	}
 
 }

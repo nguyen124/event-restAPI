@@ -5,11 +5,13 @@ import java.util.List;
 import com.afs.model.EventSession;
 
 public interface SessionService {
-	public boolean saveOrUpdateSession(EventSession session, Long eventId);
+	public boolean saveOrUpdateSessionInAnEvent(EventSession session, Long eventId);
 
-	public List<EventSession> getSessions(Long eventId);
+	public List<EventSession> getAllSessionsInAnEvent(Long eventId);
 
-	public EventSession getSession(Long sessionNo);
+	public EventSession getEventSessionById(Long sessionNo);
 
-	public boolean deleteSession(Long sessionNo);
+	public int deleteEventSessionById(Long sessionNo);
+
+	public List<EventSession> searchEventSessionByTerm(String term);
 }

@@ -28,6 +28,7 @@
 		class="com.afs.services.AccountServiceImpl"></bean>
 
 	<bean id="eventService" class="com.afs.services.EventServiceImpl"></bean>
+	
 	<bean id="sessionService"
 		class="com.afs.services.SessionServiceImpl"></bean>
 

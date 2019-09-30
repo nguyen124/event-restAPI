@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Transactional
-	public Long deleteEvent(Long eventNo) {
+	public int deleteEvent(Long eventNo) {
 		return eventDAO.deleteEvent(eventNo);
 	}
 
