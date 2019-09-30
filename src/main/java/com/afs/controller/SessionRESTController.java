@@ -39,7 +39,7 @@ public class SessionRESTController {
 		}
 	}
 
-	@RequestMapping(value = "/events/sessions/{id}/", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/events/sessions/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Integer> deleteSession(@PathVariable("id") Long sessionId) {
 		int result = sessionService.deleteEventSessionById(sessionId);
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
