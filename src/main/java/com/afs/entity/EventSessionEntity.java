@@ -24,7 +24,7 @@ public class EventSessionEntity {
 	private Integer duration;
 	@Column
 	private String level;
-	@Column(name = "abstract")
+	@Column
 	private String abstraction;
 	@ManyToOne
 	@JoinColumn(name = "eventId")

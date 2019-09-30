@@ -64,13 +64,13 @@ public class EventDAOImpl implements EventDAO {
 	public List<Event> getEvents() {
 		List<Event> list = new ArrayList<Event>();
 		try {
-			Session session = sessionFactory.getCurrentSession();
-			Query<EventEntity> getAllEventQuery = session.createQuery("From EventEntity", EventEntity.class);
+			Session currentSession = sessionFactory.getCurrentSession();
+			Query<EventEntity> getAllEventQuery = currentSession.createQuery("From EventEntity", EventEntity.class);
 			List<EventEntity> events = getAllEventQuery.getResultList();
 
 			for (EventEntity eventEnt : events) {
 				Event ev = new Event();
-				loadEvenInfo(ev, eventEnt, session);
+				loadEvenInfo(currentSession, ev, eventEnt);
 				list.add(ev);
 			}
 		} catch (Exception e) {
@@ -79,10 +79,10 @@ public class EventDAOImpl implements EventDAO {
 		return list;
 	}
 
-	private void loadEvenInfo(Event ev, EventEntity eventEnt, Session session) {
+	private void loadEvenInfo(Session currentSession, Event ev, EventEntity eventEnt) {
 		setEventBasicInfo(ev, eventEnt);
 		setEventLocation(ev, eventEnt);
-		setEventSessions(ev, eventEnt, session);
+		setEventSessions(currentSession, ev, eventEnt);
 	}
 
 	private void setEventBasicInfo(Event ev, EventEntity eventEnt) {
@@ -106,7 +106,7 @@ public class EventDAOImpl implements EventDAO {
 		}
 	}
 
-	private void setEventSessions(Event ev, EventEntity eventEnt, Session currentSession) {
+	private void setEventSessions(Session currentSession, Event ev, EventEntity eventEnt) {
 		Query<EventSessionEntity> getOneEventSessionQuery = currentSession.createQuery(
 				"From EventSessionEntity ES where ES.event.id = " + eventEnt.getId(), EventSessionEntity.class);
 		List<EventSessionEntity> eventSessionEntities = getOneEventSessionQuery.getResultList();
@@ -133,7 +133,7 @@ public class EventDAOImpl implements EventDAO {
 				EventEntity.class);
 		EventEntity eventEntity = getOneEventQuery.getSingleResult();
 		Event result = new Event();
-		setEventBasicInfo(result, eventEntity);
+		loadEvenInfo(currentSession, result, eventEntity);
 		return result;
 	}
 

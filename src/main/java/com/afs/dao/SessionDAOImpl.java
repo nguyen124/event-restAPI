@@ -21,19 +21,11 @@ public class SessionDAOImpl implements SessionDAO {
 	public boolean saveOrUpdateSession(EventSession eventSession, Long eventId) {
 		boolean saveFlag = false;
 		if (eventSession != null) {
-			EventSessionEntity sessionEntity = new EventSessionEntity();
-			sessionEntity.setName(eventSession.getName());
-			sessionEntity.setPresenter(eventSession.getPresenter());
-			sessionEntity.setLevel(eventSession.getLevel());
-			sessionEntity.setDuration(eventSession.getDuration());
-			sessionEntity.setAbstraction(eventSession.getAbstraction());
-
-			EventEntity eventEntity = new EventEntity();
-			eventEntity.setId(eventId);
-			sessionEntity.setEvent(eventEntity);
+			EventSessionEntity eventSessionEntity = new EventSessionEntity();
+			setEventSessionEntityInfo(eventId, eventSessionEntity, eventSession);
 			Session currentSession = sessionFactory.getCurrentSession();
 			try {
-				currentSession.saveOrUpdate(sessionEntity);
+				currentSession.saveOrUpdate(eventSessionEntity);
 				saveFlag = true;
 			} catch (Exception e) {
 				currentSession.clear();
@@ -41,6 +33,19 @@ public class SessionDAOImpl implements SessionDAO {
 			}
 		}
 		return saveFlag;
+	}
+
+	private void setEventSessionEntityInfo(Long eventId, EventSessionEntity eventSessionEntity,
+			EventSession eventSession) {
+		eventSessionEntity.setName(eventSession.getName());
+		eventSessionEntity.setPresenter(eventSession.getPresenter());
+		eventSessionEntity.setLevel(eventSession.getLevel());
+		eventSessionEntity.setDuration(eventSession.getDuration());
+		eventSessionEntity.setAbstraction(eventSession.getAbstraction());
+
+		EventEntity eventEntity = new EventEntity();
+		eventEntity.setId(eventId);
+		eventSessionEntity.setEvent(eventEntity);
 	}
 
 	public List<EventSession> getSessions(Long eventId) {
