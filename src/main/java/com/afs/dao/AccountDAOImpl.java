@@ -18,20 +18,22 @@ public class AccountDAOImpl implements AccountDAO {
 	private SessionFactory sessionFactory;
 
 	public boolean saveOrUpdateAccount(Account account) {
-		boolean saveFlag = true;
-		AccountEntity accEnt = new AccountEntity();
-		accEnt.setId(account.getId());
-		accEnt.setAccHolderName(account.getAccountHolderName());
-		accEnt.setBalance(account.getBalance());
-		accEnt.setDob(account.getDob());
-		accEnt.setPsCode(account.getPsCode());
-		try {
+		boolean saveFlag = false;
+		if (account != null) {
+			AccountEntity accEnt = new AccountEntity();
+			accEnt.setId(account.getId());
+			accEnt.setAccHolderName(account.getAccountHolderName());
+			accEnt.setBalance(account.getBalance());
+			accEnt.setDob(account.getDob());
+			accEnt.setPsCode(account.getPsCode());
 			Session currentSession = sessionFactory.getCurrentSession();
-			currentSession.save(accEnt);
-			// currentSession.saveOrUpdate(accEnt);
-		} catch (Exception e) {
-			e.printStackTrace();
-			saveFlag = false;
+			try {
+				currentSession.saveOrUpdate(accEnt);
+				saveFlag = true;
+			} catch (Exception e) {
+				currentSession.clear();
+				e.printStackTrace();
+			}
 		}
 		return saveFlag;
 	}

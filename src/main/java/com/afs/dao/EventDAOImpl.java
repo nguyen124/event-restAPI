@@ -65,8 +65,8 @@ public class EventDAOImpl implements EventDAO {
 		List<Event> list = new ArrayList<Event>();
 		try {
 			Session session = sessionFactory.getCurrentSession();
-			Query<EventEntity> query = session.createQuery("From EventEntity", EventEntity.class);
-			List<EventEntity> events = query.getResultList();
+			Query<EventEntity> getAllEventQuery = session.createQuery("From EventEntity", EventEntity.class);
+			List<EventEntity> events = getAllEventQuery.getResultList();
 
 			for (EventEntity eventEnt : events) {
 				Event ev = new Event();
@@ -80,12 +80,12 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	private void loadEvenInfo(Event ev, EventEntity eventEnt, Session session) {
-		loadEventBasicInfo(ev, eventEnt);
-		loadEventLocation(ev, eventEnt);
-		loadEventSessions(ev, eventEnt, session);
+		setEventBasicInfo(ev, eventEnt);
+		setEventLocation(ev, eventEnt);
+		setEventSessions(ev, eventEnt, session);
 	}
 
-	private void loadEventBasicInfo(Event ev, EventEntity eventEnt) {
+	private void setEventBasicInfo(Event ev, EventEntity eventEnt) {
 		ev.setId(eventEnt.getId());
 		ev.setName(eventEnt.getName());
 		ev.setDate(eventEnt.getDate());
@@ -95,7 +95,7 @@ public class EventDAOImpl implements EventDAO {
 		ev.setOnlineUrl(eventEnt.getOnlineUrl());
 	}
 
-	private void loadEventLocation(Event ev, EventEntity eventEnt) {
+	private void setEventLocation(Event ev, EventEntity eventEnt) {
 		Location location = new Location();
 		if (eventEnt.getLocation() != null) {
 			location.setId(eventEnt.getLocation().getId());
@@ -106,10 +106,10 @@ public class EventDAOImpl implements EventDAO {
 		}
 	}
 
-	private void loadEventSessions(Event ev, EventEntity eventEnt, Session session) {
-		Query<EventSessionEntity> sessionQuery = session.createQuery(
+	private void setEventSessions(Event ev, EventEntity eventEnt, Session currentSession) {
+		Query<EventSessionEntity> getOneEventSessionQuery = currentSession.createQuery(
 				"From EventSessionEntity ES where ES.event.id = " + eventEnt.getId(), EventSessionEntity.class);
-		List<EventSessionEntity> eventSessionEntities = sessionQuery.getResultList();
+		List<EventSessionEntity> eventSessionEntities = getOneEventSessionQuery.getResultList();
 
 		List<EventSession> eventSessions = new ArrayList<EventSession>();
 		for (EventSessionEntity sessionEnt : eventSessionEntities) {
@@ -127,13 +127,22 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	public Event getEvent(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Query<EventEntity> getOneEventQuery = currentSession.createQuery("From EventEntity EE where EE.id = " + id,
+				EventEntity.class);
+		EventEntity eventEntity = getOneEventQuery.getSingleResult();
+		Event result = new Event();
+		setEventBasicInfo(result, eventEntity);
+		return result;
 	}
 
-	public boolean deleteEvent(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+	public Long deleteEvent(Long id) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query deleteOneEventQuery = currentSession.createQuery("Delete from EventEntity EE where EE.id = :id");
+		deleteOneEventQuery.setParameter("id", id);
+		long noOfRows = deleteOneEventQuery.executeUpdate();
+		return noOfRows;
 	}
 
 }

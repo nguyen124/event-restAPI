@@ -27,6 +27,12 @@ public class EventRESTController {
 		return new ResponseEntity<List<Event>>(events, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/events/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Event> getEvent(@PathVariable("id") Long id) {
+		Event result = eventService.getEvent(id);
+		return new ResponseEntity<Event>(result, HttpStatus.OK);
+	}
+	
 	@RequestMapping(value = "/events", method = RequestMethod.POST)
 	public ResponseEntity<Boolean> saveEvent(@RequestBody Event event, BindingResult result) {
 		eventService.saveOrUpdateEvent(event);
@@ -37,10 +43,10 @@ public class EventRESTController {
 			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 		}
 	}
-
+	
 	@RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Boolean> deleteEvent(@PathVariable("id") Long id) {
-		Boolean result = eventService.deleteEvent(id);
-		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+	public ResponseEntity<Long> deleteEvent(@PathVariable("id") Long id) {
+		Long result = eventService.deleteEvent(id);
+		return new ResponseEntity<Long>(result, HttpStatus.OK);
 	}
 }

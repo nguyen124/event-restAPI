@@ -31,11 +31,12 @@ public class SessionDAOImpl implements SessionDAO {
 			EventEntity eventEntity = new EventEntity();
 			eventEntity.setId(eventId);
 			sessionEntity.setEvent(eventEntity);
+			Session currentSession = sessionFactory.getCurrentSession();
 			try {
-				Session session = sessionFactory.getCurrentSession();
-				session.saveOrUpdate(sessionEntity);
+				currentSession.saveOrUpdate(sessionEntity);
 				saveFlag = true;
 			} catch (Exception e) {
+				currentSession.clear();
 				e.printStackTrace();
 			}
 		}
@@ -44,7 +45,7 @@ public class SessionDAOImpl implements SessionDAO {
 
 	public List<EventSession> getSessions(Long eventId) {
 		try {
-			
+
 			Session session = sessionFactory.getCurrentSession();
 			Query<EventSessionEntity> sessionQuery = session.createQuery(
 					"From EventSessionEntity ESE where ESE.event.id = " + eventId, EventSessionEntity.class);
