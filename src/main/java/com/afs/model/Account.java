@@ -8,8 +8,6 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Account {
@@ -25,9 +23,8 @@ public class Account {
 	private Integer balance;
 
 	@NotNull(message = "dob can't be blank")
-	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	@Past(message = "DoB can't be in future")
-	@JsonFormat(pattern = "MM/dd/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dob;
 
 	private String psCode;

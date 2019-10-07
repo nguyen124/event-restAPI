@@ -2,12 +2,14 @@ package com.afs.model;
 
 import java.util.Date;
 import java.util.List;
-import com.afs.model.EventSession;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Event {
 
 	private Long id;
 	private String name;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 	private String time;
 	private Float price;

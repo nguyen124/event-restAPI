@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "account")
 public class AccountEntity {
@@ -20,6 +22,7 @@ public class AccountEntity {
 	@Column(name = "balance")
 	private int balance;
 	@Column(name = "dob")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date dob;
 	@Column(name = "psCode")
 	private String psCode;
