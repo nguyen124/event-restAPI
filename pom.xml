@@ -12,7 +12,7 @@
 		<servletapi.version>4.0.0</servletapi.version>
 		<spring.version>5.0.1.RELEASE</spring.version>
 		<hibernate.version>5.4.1.Final</hibernate.version>
-		<security.version>4.2.3.RELEASE</security.version>
+		<security.version>5.5.7</security.version>
 		<jackson.version>2.9.8</jackson.version>
 		<webflow.version>2.4.8.RELEASE</webflow.version>
 	</properties>
