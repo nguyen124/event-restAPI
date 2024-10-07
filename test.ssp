@@ -1,6 +1,4 @@
-
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <body>
     <h1>Hello <%= name %>,  <%= age %> years old</h1>
     <h1>Welcome to <%= city %></h1>
