@@ -1,1 +1,6 @@
+<%
+  // Sample data
+  val programming_language = "Scala"
+  val code_description = "pretty"
+%>
 I like <%= programming_language %>. The code is <%= code_description %>
